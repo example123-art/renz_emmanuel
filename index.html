@@ -27,10 +27,12 @@
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-      background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+    }
+
+    /* Canvas for Data Matrix Background */
+    #matrix-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; pointer-events: none; opacity: 0.25;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -195,6 +197,9 @@
 </head>
 
 <body>
+
+  <!-- BACKGROUND CANVAS -->
+  <canvas id="matrix-canvas"></canvas>
 
   <header>
     <div class="wrap">
@@ -424,6 +429,51 @@
         track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       });
     }
+
+    // 3. DATA MATRIX BACKGROUND ANIMATION
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    
+    const drops = [];
+    for (let x = 0; x < columns; x++) {
+      drops[x] = 1; 
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#38bdf8'; // Ice Blue
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const newColumns = canvas.width / fontSize;
+      for (let x = 0; x < newColumns; x++) {
+        if (drops[x] === undefined) drops[x] = 1;
+      }
+    });
   </script>
 
 </body>
