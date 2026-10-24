@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Renz Emmanuel S. Javier's IT Portfolio" />
-  <title>Renz Emmanuel S. Javier | IT Portfolio</title>
+  <meta name="description" content="Tuliao P. Tuliao's IT Portfolio" />
+  <title>Tuliao P. Tuliao | IT Portfolio</title>
 
   <style>
-    /* ================= CYBER-SLATE & ICE BLUE THEME ================= */
+    /* ================= SOLAR FLARE THEME ================= */
     :root {
-      --bg: #0f172a; /* Deep Slate */
-      --surface: #1e293b; 
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #38bdf8; /* Ice Blue */
-      --accent-dim: rgba(56, 189, 248, 0.15);
-      --border: rgba(56, 189, 248, 0.3);
+      --bg: #0d0d0d; 
+      --surface: #1a1a1a; 
+      --text: #f5f5f5;
+      --muted: #a3a3a3;
+      --accent: #ff6b00; 
+      --accent-dim: rgba(255, 107, 0, 0.2);
+      --border: rgba(255, 107, 0, 0.3);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,10 +27,12 @@
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-      background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+    }
+
+    /* Canvas for Ascending Embers Background */
+    #star-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; pointer-events: none;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -46,7 +48,7 @@
     /* ================= HEADER ================= */
     header {
       position: fixed; width: 100%; top: 0; z-index: 10;
-      background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px);
+      background: rgba(13, 13, 13, 0.85); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
     nav { height: 75px; display: flex; align-items: center; justify-content: space-between; }
@@ -58,55 +60,51 @@
 
     /* ================= HERO ================= */
     .hero { 
-      min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr; 
-      gap: 60px; align-items: center; padding-top: 75px;
+      min-height: 100vh; display: flex; flex-direction: column; 
+      justify-content: center; align-items: center; text-align: center;
+      padding-top: 75px;
     }
     
     .eyebrow { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
-    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 900; color: #fff; }
-    .hero p { color: var(--muted); font-size: 1.1rem; margin-bottom: 30px; }
+    h1 { font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin-bottom: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; color: #fff; }
+    .hero p { color: var(--muted); font-size: 1.2rem; max-width: 700px; margin-bottom: 40px; }
     
-    .actions { display: flex; gap: 15px; flex-wrap: wrap; }
-    .btn { display: inline-block; padding: 14px 28px; border-radius: 4px; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; border: 1px solid var(--border); }
-    .btn.primary { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 15px var(--accent-dim); }
-    .btn.primary:hover { box-shadow: 0 0 30px var(--accent); transform: translateY(-3px); }
+    .actions { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px;}
+    .btn { display: inline-block; padding: 16px 32px; border-radius: 50px; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; border: 1px solid var(--border); }
+    .btn.primary { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 20px var(--accent-dim); }
+    .btn.primary:hover { box-shadow: 0 0 40px var(--accent); transform: translateY(-3px); }
     .btn.secondary { background: transparent; color: #fff; }
     .btn.secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 
-    /* ================= HEXAGON MATRIX PFP ================= */
-    .hex-container {
-      position: relative; width: 320px; height: 360px; margin: 0 auto;
+    /* ================= NEON RING PFP ================= */
+    .ring-container {
+      position: relative; width: 320px; height: 320px; margin: 0 auto;
       display: flex; justify-content: center; align-items: center;
     }
-
-    /* Glowing background hexagon */
-    .hex-bg {
+    
+    .ring-1 {
       position: absolute; width: 100%; height: 100%;
-      background: var(--accent); 
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      animation: pulseHex 3s infinite alternate;
-      z-index: 1;
+      border-radius: 50%; border: 2px dashed var(--accent);
+      animation: spin 15s linear infinite;
+    }
+    .ring-2 {
+      position: absolute; width: 85%; height: 85%;
+      border-radius: 50%; border: 1px solid rgba(255, 107, 0, 0.5);
+      border-top: 4px solid var(--accent);
+      animation: spin-reverse 10s linear infinite;
     }
 
-    @keyframes pulseHex {
-      0% { opacity: 0.3; transform: scale(0.95); filter: drop-shadow(0 0 10px var(--accent)); }
-      100% { opacity: 0.8; transform: scale(1.02); filter: drop-shadow(0 0 30px var(--accent)); }
-    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
 
-    /* The inner dark hexagon holding the photo */
-    .hex-inner {
-      position: relative; width: 290px; height: 330px;
-      background: var(--bg); 
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      z-index: 2; overflow: hidden; display: flex; justify-content: center; align-items: center;
+    .ring-photo {
+      position: relative; width: 240px; height: 240px;
+      border-radius: 50%; overflow: hidden; z-index: 2;
+      border: 4px solid var(--bg); box-shadow: 0 0 30px var(--accent-dim);
     }
-
-    .hex-inner img {
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 0.9; transition: transform 0.5s;
-    }
-
-    .hex-inner:hover img { transform: scale(1.1); }
+    
+    .ring-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .ring-photo:hover img { transform: scale(1.1); }
 
     /* ================= TECH CARDS ================= */
     section { padding: 100px 0; }
@@ -114,44 +112,45 @@
     .section-head h2 { font-size: 2.5rem; color: #fff; text-transform: uppercase; font-weight: 900; }
     .section-head p { color: var(--muted); margin-top: 10px; font-size: 1.1rem;}
 
-    .about-grid, .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .project-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+    .about-grid, .skills-grid, .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
 
-    /* Left-border highlight hover effect */
     .tech-card {
-      background: var(--surface); padding: 35px; border-radius: 4px;
-      border-left: 4px solid transparent; transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .tech-card:hover {
-      border-left-color: var(--accent);
-      transform: translateX(10px);
-      background: #243247;
+      background: var(--surface); padding: 35px; border-radius: 8px;
+      position: relative; transition: all 0.3s; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
     }
     
-    .tech-card h3 { font-size: 1.2rem; margin-bottom: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;}
+    .tech-card::after {
+      content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px;
+      background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease;
+    }
+
+    .tech-card:hover::after { transform: scaleX(1); transform-origin: left; }
+    .tech-card:hover { background: #222; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    
+    .tech-card h3 { font-size: 1.2rem; margin-bottom: 12px; color: var(--accent); text-transform: uppercase;}
     .tech-card p { color: var(--muted); font-size: 1.05rem;}
     .tech-card ul { color: var(--muted); padding-left: 20px; margin-top: 10px; }
     .tech-card li { margin-bottom: 8px; }
     
     .pillrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .pill { background: var(--accent-dim); color: var(--accent); padding: 6px 14px; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--border); border-radius: 4px; }
+    .pill { background: rgba(255, 107, 0, 0.1); color: var(--accent); padding: 8px 16px; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--border); border-radius: 4px; }
 
     /* ================= HORIZONTAL SLIDER CERTIFICATES ================= */
     .cert-section { position: relative; overflow: hidden; padding-bottom: 50px; }
     
-    /* Header layout to hold title and buttons */
     .cert-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 30px; flex-wrap: wrap; gap: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
     .cert-header .section-head { margin-bottom: 0; }
     
-    /* Buttons on the right */
     .slider-buttons { display: flex; gap: 10px; }
     .slider-btn {
-      width: 45px; height: 45px; border-radius: 4px;
+      width: 45px; height: 45px; border-radius: 50%;
       background: var(--surface); border: 1px solid var(--border); 
       color: var(--accent); font-size: 1.2rem; cursor: pointer;
       display: grid; place-items: center; transition: all 0.3s;
@@ -179,27 +178,30 @@
     .cert-actions a.download { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 
     /* ================= RESUME & CONTACT ================= */
-    .resume-band { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), transparent); border: 1px solid var(--accent); border-radius: 8px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
+    .resume-band { background: linear-gradient(135deg, rgba(255,107,0,0.1), transparent); border: 1px solid var(--accent); border-radius: 8px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 
     /* ================= RESPONSIVE ================= */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; text-align: center; gap: 50px; padding-top: 120px; }
-      .hero .actions { justify-content: center; }
-      .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-grid, .skills-grid, .project-grid, .contact-grid { grid-template-columns: 1fr; }
       .navlinks { display: none; }
       .resume-band { flex-direction: column; text-align: center; }
-      .hex-container { transform: scale(0.85); }
+      .ring-container { width: 250px; height: 250px; }
+      .ring-photo { width: 180px; height: 180px; }
+      .cert-track { padding-bottom: 20px; }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- ASCENDING EMBERS CANVAS -->
+  <canvas id="star-canvas"></canvas>
+
   <header>
     <div class="wrap">
       <nav>
-        <a class="brand" href="#home">RENZ<span>.</span></a>
+        <a class="brand" href="#home">TULIAO<span>.</span></a>
         <div class="navlinks">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
@@ -213,47 +215,51 @@
 
   <main>
 
-    <!-- SPLIT HERO -->
+    <!-- HERO -->
     <div class="wrap hero" id="home">
       <div class="hidden-el">
         <div class="eyebrow">Information Technology Student</div>
-        <h1>Renz Emmanuel<br>S. Javier</h1>
-        <p>A motivated and dependable applicant seeking an opportunity to apply my education, communication skills, and computer knowledge while contributing to the organization’s goals and continuing to develop professionally.</p>
+        <h1>Tuliao P.<br>Tuliao</h1>
+        <p>I am an aspiring IT professional with a strong foundation in technical support and system troubleshooting, eager to apply my skills in a dynamic environment.</p>
         <div class="actions">
-          <a class="btn primary" href="#projects">View My Projects</a>
+          <a class="btn primary" href="#projects">View Projects</a>
           <a class="btn secondary" href="#resume">Download Resume</a>
         </div>
       </div>
       
       <div class="hidden-el">
-        <!-- HEXAGON MATRIX PFP -->
-        <div class="hex-container">
-          <div class="hex-bg"></div>
-          <div class="hex-inner">
-            <!-- ENSURE PHOTO IS NAMED renz.jpg -->
-            <img src="renz.jpg" alt="Renz Emmanuel S. Javier" />
+        <!-- NEON RING PFP -->
+        <div class="ring-container">
+          <div class="ring-1"></div>
+          <div class="ring-2"></div>
+          <div class="ring-photo">
+            <!-- EXACT FILENAME FROM SCREENSHOT -->
+            <img src="pfp.png" alt="Tuliao P. Tuliao" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABOUT & OBJECTIVE -->
+    <!-- ABOUT -->
     <section id="about">
       <div class="wrap-narrow">
         <div class="section-head hidden-el">
-          <div class="eyebrow">Career Objective</div>
-          <h2>Professional Goal.</h2>
+          <div class="eyebrow">About Me</div>
+          <h2>Reliable IT Solutions.</h2>
         </div>
         <div class="about-grid">
           <article class="tech-card hidden-el">
-            <h3>My Objective</h3>
-            <p>A motivated and dependable applicant seeking an opportunity at ProfDev Inc. to apply my education, communication skills, and computer knowledge while contributing to the organization’s goals and continuing to develop professionally.</p>
+            <h3>My Background</h3>
+            <p>I possess basic knowledge of computer systems, software, programming, and problem-solving. I am able to work independently or as part of a team, with a willingness to learn new skills and gain practical experience.</p>
           </article>
           <article class="tech-card hidden-el">
             <h3>Education</h3>
-            <p><strong>Northeastern College</strong><br>Bachelor of Science in Information Technology (BSIT)</p>
-            <p style="margin-top: 10px; color: var(--accent); font-weight: bold;">2024 – Present</p>
-            <p style="margin-top: 10px;">Santiago City, Isabela, Philippines</p>
+            <p><strong>Northeastern College</strong><br>Bachelor of Science in Information Technology (2026 – Present)</p>
+            <div class="pillrow">
+              <span class="pill">Computer Applications</span>
+              <span class="pill">Information Management</span>
+              <span class="pill">Database Management</span>
+            </div>
           </article>
         </div>
       </div>
@@ -268,18 +274,23 @@
         </div>
         <div class="skills-grid">
           <article class="tech-card hidden-el">
-            <h3>Core Competencies</h3>
+            <h3>Technical Skills</h3>
             <ul>
-              <li>Written and verbal communication</li>
-              <li>Time management and organization</li>
-              <li>Teamwork, adaptability, and problem-solving</li>
+              <li>File & Document Management</li>
+              <li>Hardware Troubleshooting</li>
+              <li>Software Troubleshooting</li>
+              <li>Basic Programming</li>
+              <li>Email Communication</li>
             </ul>
           </article>
           <article class="tech-card hidden-el">
-            <h3>Technical Skills</h3>
+            <h3>Soft Skills</h3>
             <ul>
-              <li>Microsoft Word, Excel, and PowerPoint</li>
-              <li>Basic computer and file-management skills</li>
+              <li>Respectful Communication</li>
+              <li>Teamwork</li>
+              <li>Time Management</li>
+              <li>Problem-Solving</li>
+              <li>Responsibility</li>
             </ul>
           </article>
         </div>
@@ -296,13 +307,19 @@
         <div class="project-grid">
           
           <article class="tech-card hidden-el">
-            <h3>Iyayam Photo Studio System</h3>
-            <p>A comprehensive management system for a photo studio. Features include booking management, customer database, inventory tracking for equipment, and an admin dashboard for daily operations.</p>
+            <h3>Barangay Villasis E-Barangay Services</h3>
+            <p>A web-based system for barangay services with an admin panel for staff and online services for residents.</p>
             <div class="pillrow">
               <span class="pill">PHP</span>
-              <span class="pill">MySQL Database</span>
-              <span class="pill">JavaScript</span>
+              <span class="pill">MySQL</span>
+              <span class="pill">Web Development</span>
             </div>
+          </article>
+
+          <article class="tech-card hidden-el">
+            <h3>Expense Tracker App (Flutter)</h3>
+            <p>A mobile application built with Flutter that allows users to track their daily expenses, categorize spending, and view a visual breakdown of their budget.</p>
+            <div class="pillrow"><span class="pill">Flutter</span><span class="pill">Dart</span><span class="pill">Mobile App</span></div>
           </article>
 
         </div>
@@ -328,28 +345,97 @@
         <!-- The scrolling track -->
         <div class="cert-track" id="cert-track">
           
+          <!-- TESDA (5) -->
           <article class="cert-card">
-            <h3>DICT Certificate 1</h3>
-            <a href="cert1.jpg" target="_blank"><img class="cert-preview" src="cert1.jpg" alt="Certificate 1" /></a>
-            <div class="cert-actions"><a href="cert1.jpg" target="_blank">View</a><a href="cert1.jpg" download="DICT-1.jpg" class="download">Save</a></div>
+            <h3>TESDA</h3>
+            <a href="1.jpg" target="_blank"><img class="cert-preview" src="1.jpg" alt="TESDA 1" /></a>
+            <div class="cert-actions"><a href="1.jpg" target="_blank">View</a><a href="1.jpg" download="TESDA-1.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>TESDA</h3>
+            <a href="2.jpg" target="_blank"><img class="cert-preview" src="2.jpg" alt="TESDA 2" /></a>
+            <div class="cert-actions"><a href="2.jpg" target="_blank">View</a><a href="2.jpg" download="TESDA-2.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>TESDA</h3>
+            <a href="3.jpg" target="_blank"><img class="cert-preview" src="3.jpg" alt="TESDA 3" /></a>
+            <div class="cert-actions"><a href="3.jpg" target="_blank">View</a><a href="3.jpg" download="TESDA-3.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>TESDA</h3>
+            <a href="4.jpg" target="_blank"><img class="cert-preview" src="4.jpg" alt="TESDA 4" /></a>
+            <div class="cert-actions"><a href="4.jpg" target="_blank">View</a><a href="4.jpg" download="TESDA-4.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>TESDA</h3>
+            <a href="5.jpg" target="_blank"><img class="cert-preview" src="5.jpg" alt="TESDA 5" /></a>
+            <div class="cert-actions"><a href="5.jpg" target="_blank">View</a><a href="5.jpg" download="TESDA-5.jpg" class="download">Save</a></div>
           </article>
 
+          <!-- DICT (4) -->
           <article class="cert-card">
-            <h3>DICT Certificate 2</h3>
-            <a href="cert2.jpg" target="_blank"><img class="cert-preview" src="cert2.jpg" alt="Certificate 2" /></a>
-            <div class="cert-actions"><a href="cert2.jpg" target="_blank">View</a><a href="cert2.jpg" download="DICT-2.jpg" class="download">Save</a></div>
+            <h3>DICT</h3>
+            <a href="dict1.jpg" target="_blank"><img class="cert-preview" src="dict1.jpg" alt="DICT 1" /></a>
+            <div class="cert-actions"><a href="dict1.jpg" target="_blank">View</a><a href="dict1.jpg" download="DICT-1.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>DICT</h3>
+            <a href="dict2.jpg" target="_blank"><img class="cert-preview" src="dict2.jpg" alt="DICT 2" /></a>
+            <div class="cert-actions"><a href="dict2.jpg" target="_blank">View</a><a href="dict2.jpg" download="DICT-2.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>DICT</h3>
+            <a href="dict3.jpg" target="_blank"><img class="cert-preview" src="dict3.jpg" alt="DICT 3" /></a>
+            <div class="cert-actions"><a href="dict3.jpg" target="_blank">View</a><a href="dict3.jpg" download="DICT-3.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>DICT</h3>
+            <a href="dict4.png" target="_blank"><img class="cert-preview" src="dict4.png" alt="DICT 4" /></a>
+            <div class="cert-actions"><a href="dict4.png" target="_blank">View</a><a href="dict4.png" download="DICT-4.png" class="download">Save</a></div>
           </article>
 
+          <!-- MICROSOFT (4) -->
           <article class="cert-card">
-            <h3>Certificate 3</h3>
-            <a href="cert3.jpg" target="_blank"><img class="cert-preview" src="cert3.jpg" alt="Certificate 3" /></a>
-            <div class="cert-actions"><a href="cert3.jpg" target="_blank">View</a><a href="cert3.jpg" download="Certificate-3.jpg" class="download">Save</a></div>
+            <h3>Microsoft</h3>
+            <a href="m1.jpg" target="_blank"><img class="cert-preview" src="m1.jpg" alt="Microsoft 1" /></a>
+            <div class="cert-actions"><a href="m1.jpg" target="_blank">View</a><a href="m1.jpg" download="Microsoft-1.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Microsoft</h3>
+            <a href="m2.jpg" target="_blank"><img class="cert-preview" src="m2.jpg" alt="Microsoft 2" /></a>
+            <div class="cert-actions"><a href="m2.jpg" target="_blank">View</a><a href="m2.jpg" download="Microsoft-2.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Microsoft</h3>
+            <a href="m3.jpg" target="_blank"><img class="cert-preview" src="m3.jpg" alt="Microsoft 3" /></a>
+            <div class="cert-actions"><a href="m3.jpg" target="_blank">View</a><a href="m3.jpg" download="Microsoft-3.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Microsoft</h3>
+            <a href="m4.jpg" target="_blank"><img class="cert-preview" src="m4.jpg" alt="Microsoft 4" /></a>
+            <div class="cert-actions"><a href="m4.jpg" target="_blank">View</a><a href="m4.jpg" download="Microsoft-4.jpg" class="download">Save</a></div>
           </article>
 
+          <!-- NORTHEASTERN COLLEGE (4) -->
           <article class="cert-card">
-            <h3>Certificate 4</h3>
-            <a href="cert4.jpg" target="_blank"><img class="cert-preview" src="cert4.jpg" alt="Certificate 4" /></a>
-            <div class="cert-actions"><a href="cert4.jpg" target="_blank">View</a><a href="cert4.jpg" download="Certificate-4.jpg" class="download">Save</a></div>
+            <h3>Northeastern College</h3>
+            <a href="nc1.jpg" target="_blank"><img class="cert-preview" src="nc1.jpg" alt="Northeastern 1" /></a>
+            <div class="cert-actions"><a href="nc1.jpg" target="_blank">View</a><a href="nc1.jpg" download="Northeastern-1.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Northeastern College</h3>
+            <a href="nc2.jpg" target="_blank"><img class="cert-preview" src="nc2.jpg" alt="Northeastern 2" /></a>
+            <div class="cert-actions"><a href="nc2.jpg" target="_blank">View</a><a href="nc2.jpg" download="Northeastern-2.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Northeastern College</h3>
+            <a href="nc3.jpg" target="_blank"><img class="cert-preview" src="nc3.jpg" alt="Northeastern 3" /></a>
+            <div class="cert-actions"><a href="nc3.jpg" target="_blank">View</a><a href="nc3.jpg" download="Northeastern-3.jpg" class="download">Save</a></div>
+          </article>
+          <article class="cert-card">
+            <h3>Northeastern College</h3>
+            <a href="nc4.jpg" target="_blank"><img class="cert-preview" src="nc4.jpg" alt="Northeastern 4" /></a>
+            <div class="cert-actions"><a href="nc4.jpg" target="_blank">View</a><a href="nc4.jpg" download="Northeastern-4.jpg" class="download">Save</a></div>
           </article>
 
         </div>
@@ -364,12 +450,12 @@
             <h2>Download my resume</h2>
             <p>My resume is available for viewing and download.</p>
           </div>
-          <a class="btn primary" href="resume.pdf" download="Renz-Javier-Resume.pdf">Download Resume</a>
+          <a class="btn primary" href="resume.pdf" download="Tuliao-Resume.pdf">Download Resume</a>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT & REFERENCES -->
+    <!-- CONTACT -->
     <section id="contact">
       <div class="wrap-narrow">
         <div class="section-head hidden-el">
@@ -378,15 +464,10 @@
         </div>
         <div class="contact-grid">
           <article class="tech-card hidden-el">
-            <h3>Character References</h3>
-            <p>Available upon request.</p>
-            <p style="margin-top: 15px; font-size: 0.9rem; font-style: italic; color: var(--muted);">"I certify that the information stated above is true and correct to the best of my knowledge."</p>
-          </article>
-          <article class="tech-card hidden-el">
             <h3>Contact Information</h3>
-            <p>Email: <a href="mailto:renz.javier@example.com" style="color:var(--accent); font-weight: bold;">renz.javier@example.com</a></p>
-            <p style="margin-top: 10px;">Phone: <a href="tel:+63000000000" style="color:var(--accent); font-weight: bold;">+63 900 000 0000</a></p>
-            <p style="margin-top: 10px;">Location: Santiago City, Isabela</p>
+            <p>Email: <a href="mailto:darreltuliao05@gmail.com" style="color:var(--accent); font-weight: bold;">darreltuliao05@gmail.com</a></p>
+            <p style="margin-top: 10px;">Phone: <a href="tel:+639971278025" style="color:var(--accent); font-weight: bold;">0997 127 8025</a></p>
+            <p style="margin-top: 10px;">Address: Santiago City, Isabela</p>
           </article>
         </div>
       </div>
@@ -396,7 +477,7 @@
 
   <footer style="text-align:center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--muted);">
     <div class="wrap">
-      <p>© 2026 Renz Emmanuel S. Javier. All rights reserved.</p>
+      <p>© 2026 Tuliao P. Tuliao. All rights reserved.</p>
     </div>
   </footer>
 
@@ -410,7 +491,78 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.hidden-el').forEach((el) => observer.observe(el));
 
-    // 2. Horizontal Certificate Slider Logic
+    // 2. Ascending Embers Background Effect
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    class Ember {
+      constructor() {
+        this.reset();
+        this.y = Math.random() * canvas.height; // Start randomly on screen
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 50; // Start below screen
+        this.size = Math.random() * 3 + 1;
+        this.speedY = Math.random() * -2 - 1; // Move up
+        this.speedX = (Math.random() - 0.5) * 1; // Slight side-to-side drift
+        this.opacity = Math.random() * 0.8 + 0.2;
+        this.color = Math.random() > 0.4 ? '#ff6b00' : '#ffcc00'; // Orange and Yellow embers
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        // Reset when it goes off the top of the screen
+        if (this.y < -50) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        // Reset shadow for other drawings
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function initEmbers() {
+      particles = [];
+      let numberOfEmbers = (canvas.width * canvas.height) / 10000; // Density
+      for (let i = 0; i < numberOfEmbers; i++) {
+        particles.push(new Ember());
+      }
+    }
+
+    function animateEmbers() {
+      requestAnimationFrame(animateEmbers);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(ember => {
+        ember.update();
+        ember.draw();
+      });
+    }
+
+    initEmbers();
+    animateEmbers();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initEmbers();
+    });
+
+    // 3. Horizontal Certificate Slider Logic
     const track = document.getElementById('cert-track');
     const btnLeft = document.getElementById('cert-left');
     const btnRight = document.getElementById('cert-right');
