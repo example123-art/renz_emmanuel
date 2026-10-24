@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Renz Emmanuel S. Javier's IT Portfolio" />
+  <title>Renz Emmanuel S. Javier | IT Portfolio</title>
+
+  <style>
+    /* ================= CYBER-SLATE & ICE BLUE THEME ================= */
+    :root {
+      --bg: #0f172a; /* Deep Slate */
+      --surface: #1e293b; 
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8; /* Ice Blue */
+      --accent-dim: rgba(56, 189, 248, 0.15);
+      --border: rgba(56, 189, 248, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    
+    .wrap { width: min(1200px, calc(100% - 40px)); margin: auto; }
+    .wrap-narrow { width: min(1000px, calc(100% - 40px)); margin: auto; }
+
+    /* ================= SCROLL ANIMATIONS ================= */
+    .hidden-el { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+    .show-el { opacity: 1; transform: translateY(0); }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed; width: 100%; top: 0; z-index: 10;
+      background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { height: 75px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 900; font-size: 1.2rem; letter-spacing: 3px; color: #fff; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; gap: 30px; }
+    .navlinks a { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); transition: all 0.3s; }
+    .navlinks a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+    /* ================= HERO ================= */
+    .hero { 
+      min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr; 
+      gap: 60px; align-items: center; padding-top: 75px;
+    }
+    
+    .eyebrow { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 900; color: #fff; }
+    .hero p { color: var(--muted); font-size: 1.1rem; margin-bottom: 30px; }
+    
+    .actions { display: flex; gap: 15px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 14px 28px; border-radius: 4px; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; border: 1px solid var(--border); }
+    .btn.primary { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 15px var(--accent-dim); }
+    .btn.primary:hover { box-shadow: 0 0 30px var(--accent); transform: translateY(-3px); }
+    .btn.secondary { background: transparent; color: #fff; }
+    .btn.secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+    /* ================= HEXAGON MATRIX PFP ================= */
+    .hex-container {
+      position: relative; width: 320px; height: 360px; margin: 0 auto;
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    /* Glowing background hexagon */
+    .hex-bg {
+      position: absolute; width: 100%; height: 100%;
+      background: var(--accent); 
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      animation: pulseHex 3s infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes pulseHex {
+      0% { opacity: 0.3; transform: scale(0.95); filter: drop-shadow(0 0 10px var(--accent)); }
+      100% { opacity: 0.8; transform: scale(1.02); filter: drop-shadow(0 0 30px var(--accent)); }
+    }
+
+    /* The inner dark hexagon holding the photo */
+    .hex-inner {
+      position: relative; width: 290px; height: 330px;
+      background: var(--bg); 
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      z-index: 2; overflow: hidden; display: flex; justify-content: center; align-items: center;
+    }
+
+    .hex-inner img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.9; transition: transform 0.5s;
+    }
+
+    .hex-inner:hover img { transform: scale(1.1); }
+
+    /* ================= TECH CARDS ================= */
+    section { padding: 100px 0; }
+    .section-head { margin-bottom: 50px; text-align: left; }
+    .section-head h2 { font-size: 2.5rem; color: #fff; text-transform: uppercase; font-weight: 900; }
+    .section-head p { color: var(--muted); margin-top: 10px; font-size: 1.1rem;}
+
+    .about-grid, .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .project-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+
+    /* Left-border highlight hover effect */
+    .tech-card {
+      background: var(--surface); padding: 35px; border-radius: 4px;
+      border-left: 4px solid transparent; transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .tech-card:hover {
+      border-left-color: var(--accent);
+      transform: translateX(10px);
+      background: #243247;
+    }
+    
+    .tech-card h3 { font-size: 1.2rem; margin-bottom: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;}
+    .tech-card p { color: var(--muted); font-size: 1.05rem;}
+    .tech-card ul { color: var(--muted); padding-left: 20px; margin-top: 10px; }
+    .tech-card li { margin-bottom: 8px; }
+    
+    .pillrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pill { background: var(--accent-dim); color: var(--accent); padding: 6px 14px; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--border); border-radius: 4px; }
+
+    /* ================= HORIZONTAL SLIDER CERTIFICATES ================= */
+    .cert-section { position: relative; overflow: hidden; padding-bottom: 50px; }
+    
+    /* Header layout to hold title and buttons */
+    .cert-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 30px; flex-wrap: wrap; gap: 20px;
+    }
+    .cert-header .section-head { margin-bottom: 0; }
+    
+    /* Buttons on the right */
+    .slider-buttons { display: flex; gap: 10px; }
+    .slider-btn {
+      width: 45px; height: 45px; border-radius: 4px;
+      background: var(--surface); border: 1px solid var(--border); 
+      color: var(--accent); font-size: 1.2rem; cursor: pointer;
+      display: grid; place-items: center; transition: all 0.3s;
+    }
+    .slider-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent-dim); }
+
+    .cert-track {
+      display: flex; gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-behavior: smooth; padding: 10px 0; -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .cert-track::-webkit-scrollbar { display: none; }
+
+    .cert-card {
+      flex: 0 0 320px; scroll-snap-align: start; background: var(--surface); 
+      border: 1px solid var(--border); border-radius: 8px; padding: 15px;
+      display: flex; flex-direction: column; gap: 15px; transition: all 0.3s;
+    }
+    .cert-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+    .cert-card h3 { font-size: 0.9rem; color: var(--accent); text-align: center; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; }
+    .cert-preview { width: 100%; height: 200px; object-fit: cover; object-position: top; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+    
+    .cert-actions { display: flex; gap: 10px; margin-top: auto; }
+    .cert-actions a { flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; font-weight: 800; text-transform: uppercase; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 4px; transition: all 0.3s; }
+    .cert-actions a:hover { background: var(--accent); color: #000; }
+    .cert-actions a.download { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    /* ================= RESUME & CONTACT ================= */
+    .resume-band { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), transparent); border: 1px solid var(--accent); border-radius: 8px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 50px; padding-top: 120px; }
+      .hero .actions { justify-content: center; }
+      .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+      .resume-band { flex-direction: column; text-align: center; }
+      .hex-container { transform: scale(0.85); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="#home">RENZ<span>.</span></a>
+        <div class="navlinks">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#profdev">Certificates</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- SPLIT HERO -->
+    <div class="wrap hero" id="home">
+      <div class="hidden-el">
+        <div class="eyebrow">Information Technology Student</div>
+        <h1>Renz Emmanuel<br>S. Javier</h1>
+        <p>A motivated and dependable applicant seeking an opportunity to apply my education, communication skills, and computer knowledge while contributing to the organization’s goals and continuing to develop professionally.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">View My Projects</a>
+          <a class="btn secondary" href="#resume">Download Resume</a>
+        </div>
+      </div>
+      
+      <div class="hidden-el">
+        <!-- HEXAGON MATRIX PFP -->
+        <div class="hex-container">
+          <div class="hex-bg"></div>
+          <div class="hex-inner">
+            <!-- ENSURE PHOTO IS NAMED renz.jpg -->
+            <img src="renz.jpg" alt="Renz Emmanuel S. Javier" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT & OBJECTIVE -->
+    <section id="about">
+      <div class="wrap-narrow">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Career Objective</div>
+          <h2>Professional Goal.</h2>
+        </div>
+        <div class="about-grid">
+          <article class="tech-card hidden-el">
+            <h3>My Objective</h3>
+            <p>A motivated and dependable applicant seeking an opportunity at ProfDev Inc. to apply my education, communication skills, and computer knowledge while contributing to the organization’s goals and continuing to develop professionally.</p>
+          </article>
+          <article class="tech-card hidden-el">
+            <h3>Education</h3>
+            <p><strong>Northeastern College</strong><br>Bachelor of Science in Information Technology (BSIT)</p>
+            <p style="margin-top: 10px; color: var(--accent); font-weight: bold;">2024 – Present</p>
+            <p style="margin-top: 10px;">Santiago City, Isabela, Philippines</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap-narrow">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Skills</div>
+          <h2>Tools and Strengths</h2>
+        </div>
+        <div class="skills-grid">
+          <article class="tech-card hidden-el">
+            <h3>Core Competencies</h3>
+            <ul>
+              <li>Written and verbal communication</li>
+              <li>Time management and organization</li>
+              <li>Teamwork, adaptability, and problem-solving</li>
+            </ul>
+          </article>
+          <article class="tech-card hidden-el">
+            <h3>Technical Skills</h3>
+            <ul>
+              <li>Microsoft Word, Excel, and PowerPoint</li>
+              <li>Basic computer and file-management skills</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="wrap-narrow">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Selected Work</div>
+          <h2>Projects</h2>
+        </div>
+        <div class="project-grid">
+          
+          <article class="tech-card hidden-el">
+            <h3>Iyayam Photo Studio System</h3>
+            <p>A comprehensive management system for a photo studio. Features include booking management, customer database, inventory tracking for equipment, and an admin dashboard for daily operations.</p>
+            <div class="pillrow">
+              <span class="pill">PHP</span>
+              <span class="pill">MySQL Database</span>
+              <span class="pill">JavaScript</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HORIZONTAL CERTIFICATES SLIDER -->
+    <section id="profdev" class="cert-section">
+      <div class="wrap">
+        
+        <!-- Header with buttons on the right -->
+        <div class="cert-header hidden-el">
+          <div class="section-head">
+            <div class="eyebrow">Professional Development</div>
+            <h2>Certificates</h2>
+          </div>
+          <div class="slider-buttons">
+            <button class="slider-btn" id="cert-left">&#10094;</button>
+            <button class="slider-btn" id="cert-right">&#10095;</button>
+          </div>
+        </div>
+
+        <!-- The scrolling track -->
+        <div class="cert-track" id="cert-track">
+          
+          <article class="cert-card">
+            <h3>DICT Certificate 1</h3>
+            <a href="cert1.jpg" target="_blank"><img class="cert-preview" src="cert1.jpg" alt="Certificate 1" /></a>
+            <div class="cert-actions"><a href="cert1.jpg" target="_blank">View</a><a href="cert1.jpg" download="DICT-1.jpg" class="download">Save</a></div>
+          </article>
+
+          <article class="cert-card">
+            <h3>DICT Certificate 2</h3>
+            <a href="cert2.jpg" target="_blank"><img class="cert-preview" src="cert2.jpg" alt="Certificate 2" /></a>
+            <div class="cert-actions"><a href="cert2.jpg" target="_blank">View</a><a href="cert2.jpg" download="DICT-2.jpg" class="download">Save</a></div>
+          </article>
+
+          <article class="cert-card">
+            <h3>Certificate 3</h3>
+            <a href="cert3.jpg" target="_blank"><img class="cert-preview" src="cert3.jpg" alt="Certificate 3" /></a>
+            <div class="cert-actions"><a href="cert3.jpg" target="_blank">View</a><a href="cert3.jpg" download="Certificate-3.jpg" class="download">Save</a></div>
+          </article>
+
+          <article class="cert-card">
+            <h3>Certificate 4</h3>
+            <a href="cert4.jpg" target="_blank"><img class="cert-preview" src="cert4.jpg" alt="Certificate 4" /></a>
+            <div class="cert-actions"><a href="cert4.jpg" target="_blank">View</a><a href="cert4.jpg" download="Certificate-4.jpg" class="download">Save</a></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME DOWNLOAD -->
+    <section id="resume">
+      <div class="wrap-narrow">
+        <div class="resume-band hidden-el">
+          <div>
+            <h2>Download my resume</h2>
+            <p>My resume is available for viewing and download.</p>
+          </div>
+          <a class="btn primary" href="resume.pdf" download="Renz-Javier-Resume.pdf">Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & REFERENCES -->
+    <section id="contact">
+      <div class="wrap-narrow">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Contact</div>
+          <h2>Let's connect.</h2>
+        </div>
+        <div class="contact-grid">
+          <article class="tech-card hidden-el">
+            <h3>Character References</h3>
+            <p>Available upon request.</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; font-style: italic; color: var(--muted);">"I certify that the information stated above is true and correct to the best of my knowledge."</p>
+          </article>
+          <article class="tech-card hidden-el">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:renz.javier@example.com" style="color:var(--accent); font-weight: bold;">renz.javier@example.com</a></p>
+            <p style="margin-top: 10px;">Phone: <a href="tel:+63000000000" style="color:var(--accent); font-weight: bold;">+63 900 000 0000</a></p>
+            <p style="margin-top: 10px;">Location: Santiago City, Isabela</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="text-align:center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--muted);">
+    <div class="wrap">
+      <p>© 2026 Renz Emmanuel S. Javier. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // 1. Scroll Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('show-el'); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.hidden-el').forEach((el) => observer.observe(el));
+
+    // 2. Horizontal Certificate Slider Logic
+    const track = document.getElementById('cert-track');
+    const btnLeft = document.getElementById('cert-left');
+    const btnRight = document.getElementById('cert-right');
+
+    if (track && btnLeft && btnRight) {
+      const scrollAmount = 350; 
+      btnLeft.addEventListener('click', () => {
+        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      btnRight.addEventListener('click', () => {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+  </script>
+
+</body>
+</html>
